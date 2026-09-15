@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Keiin Lecture - JavaScript Project</title>
+    <title>Keiin Lecture - Modern JavaScript Project</title>
     <style>
         * {
             margin: 0;
@@ -316,39 +316,39 @@
     <header>
         <div class="logo">🚀</div>
         <h1>Keiin Lecture</h1>
-        <p class="subtitle">Современный JavaScript проект</p>
+        <p class="subtitle">Modern JavaScript Project</p>
     </header>
 
     <div class="container">
         <section class="content-section">
-            <h2>👋 Добро пожаловать!</h2>
-            <p>Это интерактивный проект для изучения JavaScript. Здесь вы найдёте примеры кода, интерактивные компоненты и практические упражнения.</p>
+            <h2>👋 Welcome!</h2>
+            <p>This is an interactive project for learning JavaScript. Here you'll find code examples, interactive components, and practical exercises.</p>
         </section>
 
         <section class="content-section">
-            <h2>⭐ Возможности</h2>
+            <h2>⭐ Features</h2>
             <div class="cards">
-                <div class="card" onclick="showFeature('Интерактивность')">
+                <div class="card" onclick="showFeature('Interactive Experience')">
                     <div class="card-icon">⚡</div>
-                    <div class="card-title">Интерактивность</div>
+                    <div class="card-title">Interactive</div>
                 </div>
-                <div class="card" onclick="showFeature('Современный дизайн')">
+                <div class="card" onclick="showFeature('Modern Design')">
                     <div class="card-icon">🎨</div>
-                    <div class="card-title">Дизайн</div>
+                    <div class="card-title">Design</div>
                 </div>
-                <div class="card" onclick="showFeature('Легко расширяемо')">
+                <div class="card" onclick="showFeature('Easy to Extend')">
                     <div class="card-icon">🔧</div>
-                    <div class="card-title">Гибкость</div>
+                    <div class="card-title">Flexible</div>
                 </div>
-                <div class="card" onclick="showFeature('Отзывчивый интерфейс')">
+                <div class="card" onclick="showFeature('Responsive Interface')">
                     <div class="card-icon">📱</div>
-                    <div class="card-title">Адаптив</div>
+                    <div class="card-title">Responsive</div>
                 </div>
             </div>
         </section>
 
         <section class="content-section">
-            <h2>🎯 Интерактивный счётчик</h2>
+            <h2>🎯 Interactive Counter</h2>
             <div class="counter">
                 <button class="counter-btn" onclick="decreaseCounter()">−</button>
                 <div class="counter-value" id="counter">0</div>
@@ -357,13 +357,13 @@
         </section>
 
         <div class="button-group">
-            <button class="btn-primary" onclick="showMessage()">💬 Сообщение</button>
-            <button class="btn-secondary" onclick="openConsole()">🖥️ Консоль</button>
+            <button class="btn-primary" onclick="showMessage()">💬 Message</button>
+            <button class="btn-secondary" onclick="openConsole()">🖥️ Console</button>
         </div>
     </div>
 
     <footer>
-        <p>Создано с <span class="heart">❤</span> для изучения JavaScript</p>
+        <p>Built with <span class="heart">❤</span> for learning JavaScript</p>
         <p>Keiin Lecture 2024</p>
     </footer>
 
@@ -372,10 +372,10 @@
 
         function showMessage() {
             const messages = [
-                '👋 Привет! Добро пожаловать в JavaScript!',
-                '🚀 Вы потрясающий программист!',
-                '💡 JavaScript — это мощный язык программирования!',
-                '🎉 Успехов в изучении программирования!'
+                '👋 Hello! Welcome to JavaScript!',
+                '🚀 You are an amazing programmer!',
+                '💡 JavaScript is a powerful programming language!',
+                '🎉 Keep learning and coding!'
             ];
             const randomMessage = messages[Math.floor(Math.random() * messages.length)];
             alert(randomMessage);
@@ -385,9 +385,9 @@
         function openConsole() {
             console.clear();
             console.log('%c🚀 JavaScript Console', 'color: #667eea; font-size: 18px; font-weight: bold;');
-            console.log('%cПроект успешно запущен!', 'color: #764ba2; font-size: 14px;');
+            console.log('%cProject successfully launched!', 'color: #764ba2; font-size: 14px;');
             console.log('📊 Counter:', counter);
-            console.log('📅 Time:', new Date().toLocaleString('ru-RU'));
+            console.log('📅 Time:', new Date().toLocaleString('en-US'));
         }
 
         function increaseCounter() {
@@ -404,13 +404,13 @@
 
         function showFeature(feature) {
             console.log('✨ Feature selected:', feature);
-            alert('🌟 ' + feature + '\n\nЭто отличная функция для вашего проекта!');
+            alert('🌟 ' + feature + '\n\nThis is a great feature for your project!');
         }
 
-        // Инициализация
+        // Initialize
         console.log('%c🎓 Keiin Lecture', 'color: #667eea; font-size: 20px; font-weight: bold;');
-        console.log('Добро пожаловать в консоль разработчика!');
-        console.log('Используйте функции ниже для взаимодействия:');
+        console.log('Welcome to the Developer Console!');
+        console.log('Use the functions below to interact:');
         console.log('- showMessage()');
         console.log('- increaseCounter() / decreaseCounter()');
         console.log('- showFeature(name)');
