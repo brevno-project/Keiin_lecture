@@ -4,223 +4,111 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Paper Lane — Stationery Shop</title>
-    <meta name="description" content="Paper Lane: a small online stationery shop. Orders are stored in Supabase.">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <header class="nav">
-        <div class="wrap nav-inner">
-            <a href="#" class="brand">Paper<span>Lane</span></a>
-            <nav class="nav-links">
-                <a href="#products">Products</a>
-                <a href="#about">About</a>
-                <a href="#order">Order</a>
-                <a href="#orders">Live orders</a>
-            </nav>
-        </div>
+    <header>
+        <a href="#" class="logo">Paper<span>Lane</span></a>
+        <nav>
+            <a href="#products">Products</a>
+            <a href="#order">Order</a>
+            <a href="#orders">Orders</a>
+        </nav>
     </header>
 
     <main>
-        <!-- Hero -->
-        <section class="hero wrap">
-            <div class="hero-text">
-                <p class="eyebrow">Online stationery market</p>
-                <h1>Good paper makes<br>good ideas.</h1>
-                <p class="lead">Notebooks, pens and planners chosen for people who still like to write by hand. Pick an item, place an order, and watch it appear in our live order feed.</p>
-                <div class="hero-actions">
-                    <a href="#products" class="btn btn-dark">Browse products</a>
-                    <a href="#order" class="btn btn-ghost">Place an order</a>
-                </div>
-            </div>
-            <div class="hero-image">
-                <img src="images.jpg" alt="Black spiral notebook with gold lettering">
-            </div>
+        <!-- About the shop -->
+        <section class="hero">
+            <h1>Good paper makes good ideas</h1>
+            <p>Paper Lane is a small online stationery shop. We sell notebooks, pens, planners and pencils for people who like to write by hand.</p>
+            <p>Choose a product, fill in the order form, and your order will be saved in our database.</p>
+            <a href="#products" class="button">See products</a>
         </section>
 
         <!-- Products -->
-        <section id="products" class="section wrap">
-            <div class="section-head">
-                <h2>Products</h2>
-                <p>Four essentials, all in stock.</p>
-            </div>
+        <section id="products">
+            <h2>Products</h2>
             <div class="products">
-                <article class="product">
-                    <div class="product-img photo"><img src="images.jpg" alt="Classic notebook"></div>
-                    <div class="product-body">
-                        <h3>Classic Notebook</h3>
-                        <p>A5 spiral notebook, 120 lined pages, gold wire binding.</p>
-                        <div class="product-foot">
-                            <span class="price">$12.00</span>
-                            <button class="btn btn-small" data-product="Classic Notebook">Order</button>
-                        </div>
-                    </div>
-                </article>
-
-                <article class="product">
-                    <div class="product-img tint-blue">
-                        <svg viewBox="0 0 120 120" aria-hidden="true">
-                            <rect x="54" y="14" width="12" height="62" rx="5" fill="#1f2a44"/>
-                            <rect x="54" y="30" width="12" height="4" fill="#c9a24b"/>
-                            <path d="M54 76 h12 l-6 26 z" fill="#c9a24b"/>
-                            <line x1="60" y1="84" x2="60" y2="98" stroke="#1f2a44" stroke-width="1.5"/>
-                        </svg>
-                    </div>
-                    <div class="product-body">
-                        <h3>Fountain Pen</h3>
-                        <p>Steel nib, navy body, comes with two ink cartridges.</p>
-                        <div class="product-foot">
-                            <span class="price">$24.00</span>
-                            <button class="btn btn-small" data-product="Fountain Pen">Order</button>
-                        </div>
-                    </div>
-                </article>
-
-                <article class="product">
-                    <div class="product-img tint-green">
-                        <svg viewBox="0 0 120 120" aria-hidden="true">
-                            <rect x="28" y="18" width="64" height="84" rx="4" fill="#fffdf7" stroke="#2f4a3a" stroke-width="3"/>
-                            <rect x="28" y="18" width="64" height="16" rx="4" fill="#2f4a3a"/>
-                            <g stroke="#2f4a3a" stroke-width="1.5" opacity=".55">
-                                <line x1="36" y1="46" x2="84" y2="46"/><line x1="36" y1="58" x2="84" y2="58"/>
-                                <line x1="36" y1="70" x2="84" y2="70"/><line x1="36" y1="82" x2="84" y2="82"/>
-                                <line x1="36" y1="94" x2="70" y2="94"/>
-                            </g>
-                            <circle cx="42" cy="46" r="3" fill="#c9a24b"/>
-                        </svg>
-                    </div>
-                    <div class="product-body">
-                        <h3>Weekly Planner</h3>
-                        <p>Undated 52-week layout with habit tracker and notes.</p>
-                        <div class="product-foot">
-                            <span class="price">$18.00</span>
-                            <button class="btn btn-small" data-product="Weekly Planner">Order</button>
-                        </div>
-                    </div>
-                </article>
-
-                <article class="product">
-                    <div class="product-img tint-sand">
-                        <svg viewBox="0 0 120 120" aria-hidden="true">
-                            <g transform="rotate(-12 60 60)">
-                                <rect x="30" y="20" width="10" height="70" fill="#c0503a"/><path d="M30 90h10l-5 12z" fill="#e8c9a0"/>
-                                <rect x="45" y="20" width="10" height="70" fill="#d99a2b"/><path d="M45 90h10l-5 12z" fill="#e8c9a0"/>
-                                <rect x="60" y="20" width="10" height="70" fill="#3f7a55"/><path d="M60 90h10l-5 12z" fill="#e8c9a0"/>
-                                <rect x="75" y="20" width="10" height="70" fill="#2f5d8a"/><path d="M75 90h10l-5 12z" fill="#e8c9a0"/>
-                            </g>
-                        </svg>
-                    </div>
-                    <div class="product-body">
-                        <h3>Colored Pencil Set</h3>
-                        <p>24 soft-core pencils in a tin case, great for sketching.</p>
-                        <div class="product-foot">
-                            <span class="price">$15.00</span>
-                            <button class="btn btn-small" data-product="Colored Pencil Set">Order</button>
-                        </div>
-                    </div>
-                </article>
-            </div>
-        </section>
-
-        <!-- About -->
-        <section id="about" class="section wrap about">
-            <div class="section-head">
-                <h2>Why Paper Lane</h2>
-            </div>
-            <div class="features">
-                <div class="feature">
-                    <span class="feature-num">01</span>
-                    <h3>Hand-picked</h3>
-                    <p>Every item is tested for paper weight, ink bleed and binding before it goes on the shelf.</p>
+                <div class="card">
+                    <img src="img/notebook.jpg" alt="Classic notebook">
+                    <h3>Classic Notebook</h3>
+                    <p>A5 spiral notebook, 120 lined pages.</p>
+                    <p class="price">$12</p>
+                    <button onclick="chooseProduct('Classic Notebook')">Order</button>
                 </div>
-                <div class="feature">
-                    <span class="feature-num">02</span>
-                    <h3>Fast delivery</h3>
-                    <p>Orders placed before 2 PM ship the same day, anywhere in the city.</p>
+                <div class="card">
+                    <img src="img/pen.jpg" alt="Fountain pen on an open notebook">
+                    <h3>Fountain Pen</h3>
+                    <p>Steel nib, comes with two ink cartridges.</p>
+                    <p class="price">$24</p>
+                    <button onclick="chooseProduct('Fountain Pen')">Order</button>
                 </div>
-                <div class="feature">
-                    <span class="feature-num">03</span>
-                    <h3>Live order feed</h3>
-                    <p>Orders are saved to a Supabase database and shown below the moment they are placed.</p>
+                <div class="card">
+                    <img src="img/planner.jpg" alt="Grey life planner">
+                    <h3>Weekly Planner</h3>
+                    <p>Undated 52-week planner with notes pages.</p>
+                    <p class="price">$18</p>
+                    <button onclick="chooseProduct('Weekly Planner')">Order</button>
+                </div>
+                <div class="card">
+                    <img src="img/pencils.jpg" alt="Colored pencils">
+                    <h3>Colored Pencils</h3>
+                    <p>Set of 24 soft colored pencils.</p>
+                    <p class="price">$15</p>
+                    <button onclick="chooseProduct('Colored Pencils')">Order</button>
                 </div>
             </div>
         </section>
 
-        <!-- Order form -->
-        <section id="order" class="section wrap">
-            <div class="order-grid">
-                <div class="section-head">
-                    <h2>Place an order</h2>
-                    <p>Fill in the form. Your order is sent to the <code>orders</code> table in Supabase. Your e-mail and message stay private and are never shown on this page.</p>
-                </div>
+        <!-- Order form: data is sent to Supabase -->
+        <section id="order">
+            <h2>Place an order</h2>
+            <form id="order-form">
+                <label for="name">Your name</label>
+                <input id="name" type="text" required>
 
-                <form id="order-form" class="form" novalidate>
-                    <div class="field">
-                        <label for="customer_name">Name</label>
-                        <input id="customer_name" name="customer_name" type="text" maxlength="80" required autocomplete="name">
-                    </div>
-                    <div class="field">
-                        <label for="email">E-mail</label>
-                        <input id="email" name="email" type="email" maxlength="120" required autocomplete="email">
-                    </div>
-                    <div class="field-row">
-                        <div class="field">
-                            <label for="product">Product</label>
-                            <select id="product" name="product" required>
-                                <option value="">Choose…</option>
-                                <option>Classic Notebook</option>
-                                <option>Fountain Pen</option>
-                                <option>Weekly Planner</option>
-                                <option>Colored Pencil Set</option>
-                            </select>
-                        </div>
-                        <div class="field field-qty">
-                            <label for="quantity">Qty</label>
-                            <input id="quantity" name="quantity" type="number" min="1" max="20" value="1" required>
-                        </div>
-                    </div>
-                    <div class="field">
-                        <label for="message">Message <span class="optional">(optional)</span></label>
-                        <textarea id="message" name="message" rows="3" maxlength="500" placeholder="Gift wrapping, delivery notes…"></textarea>
-                    </div>
-                    <button type="submit" class="btn btn-dark btn-block" id="submit-btn">Send order</button>
-                    <p id="form-status" class="status" role="status" aria-live="polite"></p>
-                </form>
-            </div>
+                <label for="product">Product</label>
+                <select id="product" required>
+                    <option value="">Choose a product</option>
+                    <option>Classic Notebook</option>
+                    <option>Fountain Pen</option>
+                    <option>Weekly Planner</option>
+                    <option>Colored Pencils</option>
+                </select>
+
+                <label for="quantity">Quantity</label>
+                <input id="quantity" type="number" min="1" max="20" value="1" required>
+
+                <label for="message">Message (optional)</label>
+                <textarea id="message" rows="3"></textarea>
+
+                <button type="submit">Send order</button>
+                <p id="status"></p>
+            </form>
         </section>
 
-        <!-- Live orders -->
-        <section id="orders" class="section wrap">
-            <div class="section-head section-head-row">
-                <div>
-                    <h2>Live orders</h2>
-                    <p>The latest 10 rows, read straight from the Supabase database.</p>
-                </div>
-                <button class="btn btn-ghost btn-small" id="refresh-btn">Refresh</button>
-            </div>
-            <div class="table-wrap">
-                <table class="orders-table">
+        <!-- Orders: data is read from Supabase -->
+        <section id="orders">
+            <h2>Latest orders</h2>
+            <p>These orders are loaded from the Supabase database.</p>
+            <div class="table-box">
+                <table>
                     <thead>
-                        <tr><th>Time</th><th>Customer</th><th>Product</th><th class="num">Qty</th></tr>
+                        <tr><th>Time</th><th>Name</th><th>Product</th><th>Qty</th><th>Message</th></tr>
                     </thead>
-                    <tbody id="orders-body">
-                        <tr><td colspan="4" class="muted">Loading…</td></tr>
+                    <tbody id="orders-list">
+                        <tr><td colspan="5">Loading...</td></tr>
                     </tbody>
                 </table>
             </div>
         </section>
     </main>
 
-    <footer class="footer">
-        <div class="wrap">
-            <p>Paper Lane · Homepage assignment · Hosted on GitHub Pages, data stored in Supabase</p>
-        </div>
+    <footer>
+        <p>Paper Lane · Made with HTML, CSS, JavaScript and Supabase · Photos: Wikimedia Commons (CC0)</p>
     </footer>
 
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-    <script src="config.js"></script>
     <script src="app.js"></script>
 </body>
 </html>

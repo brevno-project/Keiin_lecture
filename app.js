@@ -1,137 +1,71 @@
-const TABLE = 'orders';
+// Connect to Supabase (Project Settings -> API Keys)
+const SUPABASE_URL = 'https://ooargjglyhaaadrkdizl.supabase.co';
+const SUPABASE_KEY = 'sb_publishable_ure_fwDuxOeG1dpR-c4t7w_ACwxt3wB';
+const db = supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
 
 const form = document.getElementById('order-form');
-const submitBtn = document.getElementById('submit-btn');
-const statusEl = document.getElementById('form-status');
-const ordersBody = document.getElementById('orders-body');
-const refreshBtn = document.getElementById('refresh-btn');
+const statusText = document.getElementById('status');
+const ordersList = document.getElementById('orders-list');
 
-const configured =
-    window.SUPABASE_URL && !window.SUPABASE_URL.includes('YOUR-PROJECT') &&
-    window.SUPABASE_KEY && !window.SUPABASE_KEY.includes('YOUR-');
-
-const db = configured ? supabase.createClient(window.SUPABASE_URL, window.SUPABASE_KEY) : null;
-
-function setStatus(text, type) {
-    statusEl.textContent = text;
-    statusEl.className = 'status' + (type ? ' ' + type : '');
+// "Order" button on a product card: choose the product in the form
+function chooseProduct(product) {
+    document.getElementById('product').value = product;
+    document.getElementById('order').scrollIntoView({ behavior: 'smooth' });
 }
 
-function showTableMessage(text) {
-    ordersBody.innerHTML = '';
-    const row = ordersBody.insertRow();
-    const cell = row.insertCell();
-    cell.colSpan = 4;
-    cell.className = 'muted';
-    cell.textContent = text;
-}
-
-function formatTime(iso) {
-    return new Date(iso).toLocaleString('en-US', {
-        month: 'short', day: 'numeric', hour: '2-digit', minute: '2-digit'
-    });
-}
-
-// Read the latest orders from Supabase
-async function loadOrders(highlightFirst = false) {
-    if (!db) {
-        showTableMessage('Supabase is not configured yet: fill in config.js.');
-        return;
-    }
-
-    const { data, error } = await db
-        .from(TABLE)
-        .select('id, created_at, customer_name, product, quantity')
-        .order('created_at', { ascending: false })
-        .limit(10);
-
-    if (error) {
-        console.error(error);
-        showTableMessage('Could not load orders: ' + error.message);
-        return;
-    }
-    if (data.length === 0) {
-        showTableMessage('No orders yet. Be the first!');
-        return;
-    }
-
-    ordersBody.innerHTML = '';
-    data.forEach((order, i) => {
-        const row = ordersBody.insertRow();
-        if (highlightFirst && i === 0) row.className = 'fresh';
-        row.insertCell().textContent = formatTime(order.created_at);
-        row.insertCell().textContent = order.customer_name;
-        row.insertCell().textContent = order.product;
-        const qty = row.insertCell();
-        qty.className = 'num';
-        qty.textContent = order.quantity;
-    });
-}
-
-function validate(order) {
-    const errors = [];
-    form.querySelectorAll('.invalid').forEach(el => el.classList.remove('invalid'));
-
-    if (!order.customer_name) errors.push('customer_name');
-    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(order.email)) errors.push('email');
-    if (!order.product) errors.push('product');
-    if (!Number.isInteger(order.quantity) || order.quantity < 1 || order.quantity > 20) errors.push('quantity');
-
-    errors.forEach(id => document.getElementById(id).classList.add('invalid'));
-    return errors.length === 0;
-}
-
-// Send a new order to Supabase
+// 1. Send the form data to the Supabase "orders" table
 form.addEventListener('submit', async (event) => {
     event.preventDefault();
 
     const order = {
-        customer_name: form.customer_name.value.trim(),
-        email: form.email.value.trim(),
-        product: form.product.value,
-        quantity: Number(form.quantity.value),
-        message: form.message.value.trim() || null
+        name: document.getElementById('name').value,
+        product: document.getElementById('product').value,
+        quantity: Number(document.getElementById('quantity').value),
+        message: document.getElementById('message').value
     };
 
-    if (!validate(order)) {
-        setStatus('Please check the highlighted fields.', 'err');
-        return;
-    }
-    if (!db) {
-        setStatus('Supabase is not configured yet: fill in config.js.', 'err');
-        return;
-    }
-
-    submitBtn.disabled = true;
-    submitBtn.textContent = 'Sending…';
-    setStatus('');
-
-    const { error } = await db.from(TABLE).insert(order);
-
-    submitBtn.disabled = false;
-    submitBtn.textContent = 'Send order';
+    statusText.textContent = 'Sending...';
+    const { error } = await db.from('orders').insert(order);
 
     if (error) {
-        console.error(error);
-        setStatus('Something went wrong: ' + error.message, 'err');
+        statusText.textContent = 'Error: ' + error.message;
         return;
     }
 
-    setStatus(`Thank you, ${order.customer_name}! Your order was saved to the database.`, 'ok');
+    statusText.textContent = 'Thank you! Your order was saved to the database.';
     form.reset();
-    await loadOrders(true);
-    document.getElementById('orders').scrollIntoView({ behavior: 'smooth' });
+    loadOrders();
 });
 
-// "Order" buttons on product cards preselect the product in the form
-document.querySelectorAll('[data-product]').forEach(btn => {
-    btn.addEventListener('click', () => {
-        form.product.value = btn.dataset.product;
-        document.getElementById('order').scrollIntoView({ behavior: 'smooth' });
-        form.customer_name.focus({ preventScroll: true });
-    });
-});
+// 2. Read the latest orders from Supabase and show them in the table
+async function loadOrders() {
+    const { data, error } = await db
+        .from('orders')
+        .select('*')
+        .order('created_at', { ascending: false })
+        .limit(10);
 
-refreshBtn.addEventListener('click', () => loadOrders());
+    if (error) {
+        ordersList.innerHTML = '<tr><td colspan="5">Error: could not load orders</td></tr>';
+        return;
+    }
+    if (data.length === 0) {
+        ordersList.innerHTML = '<tr><td colspan="5">No orders yet.</td></tr>';
+        return;
+    }
+
+    ordersList.innerHTML = '';
+    for (const order of data) {
+        const time = new Date(order.created_at).toLocaleString();
+        const row = document.createElement('tr');
+        // textContent (not innerHTML) so user text is shown as plain text
+        for (const value of [time, order.name, order.product, order.quantity, order.message]) {
+            const cell = document.createElement('td');
+            cell.textContent = value;
+            row.appendChild(cell);
+        }
+        ordersList.appendChild(row);
+    }
+}
 
 loadOrders();
