@@ -126,6 +126,25 @@ button:hover {
     color: #222;
 }
 
+/* About section */
+#about ul {
+    padding-left: 20px;
+}
+
+.video {
+    width: 100%;
+    max-width: 640px;
+    aspect-ratio: 16 / 9;
+    border: none;
+    border-radius: 10px;
+}
+
+#total {
+    margin: 12px 0 0;
+    font-size: 18px;
+    font-weight: bold;
+}
+
 /* Order form */
 form {
     max-width: 500px;

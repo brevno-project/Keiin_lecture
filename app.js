@@ -7,9 +7,27 @@ const form = document.getElementById('order-form');
 const statusText = document.getElementById('status');
 const ordersList = document.getElementById('orders-list');
 
+// Product prices in dollars
+const prices = {
+    'Classic Notebook': 12,
+    'Fountain Pen': 24,
+    'Weekly Planner': 18,
+    'Colored Pencils': 15
+};
+
+// Show the total price: price x quantity
+function showTotal() {
+    const price = prices[document.getElementById('product').value] || 0;
+    const quantity = Number(document.getElementById('quantity').value);
+    document.getElementById('total').textContent = 'Total: $' + price * quantity;
+}
+document.getElementById('product').addEventListener('change', showTotal);
+document.getElementById('quantity').addEventListener('input', showTotal);
+
 // "Order" button on a product card: choose the product in the form
 function chooseProduct(product) {
     document.getElementById('product').value = product;
+    showTotal();
     document.getElementById('order').scrollIntoView({ behavior: 'smooth' });
 }
 
@@ -34,6 +52,7 @@ form.addEventListener('submit', async (event) => {
 
     statusText.textContent = 'Thank you! Your order was saved to the database.';
     form.reset();
+    showTotal();
     loadOrders();
 });
 

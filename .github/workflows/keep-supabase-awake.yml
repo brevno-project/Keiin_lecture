@@ -1,0 +1,18 @@
+# The free Supabase project goes to sleep after about a week without requests.
+# This job reads one row from the "orders" table twice a week to keep it awake.
+name: Keep Supabase awake
+
+on:
+  schedule:
+    - cron: '0 3 * * 1,4' # Monday and Thursday, 03:00 UTC
+  workflow_dispatch: # allows starting it by hand from the Actions tab
+
+jobs:
+  ping:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Read one order from Supabase
+        run: |
+          curl --fail --silent --show-error --max-time 30 \
+            "https://ooargjglyhaaadrkdizl.supabase.co/rest/v1/orders?select=id&limit=1" \
+            -H "apikey: sb_publishable_ure_fwDuxOeG1dpR-c4t7w_ACwxt3wB"

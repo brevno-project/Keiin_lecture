@@ -20,6 +20,7 @@ Homepage assignment. Topic: **Online Market**.
 | `app.js` | Connects to Supabase, sends and reads orders |
 | `supabase.sql` | SQL that creates the `orders` table |
 | `img/` | Product photos |
+| `.github/workflows/keep-supabase-awake.yml` | Opens the database twice a week so the free Supabase project does not go to sleep |
 
 ## How to check
 

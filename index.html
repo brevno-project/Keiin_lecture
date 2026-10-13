@@ -11,6 +11,7 @@
         <a href="#" class="logo">Paper<span>Lane</span></a>
         <nav>
             <a href="#products">Products</a>
+            <a href="#about">About</a>
             <a href="#order">Order</a>
             <a href="#orders">Orders</a>
         </nav>
@@ -60,6 +61,19 @@
             </div>
         </section>
 
+        <!-- About: list and video -->
+        <section id="about">
+            <h2>About us</h2>
+            <p>Paper Lane is a student project made by Artem. It shows how a small online shop can save orders in a database.</p>
+            <ul>
+                <li>✏️ We sell only products that we use ourselves</li>
+                <li>🚚 Delivery in 2–3 days</li>
+                <li>💬 Every order is saved and answered</li>
+            </ul>
+            <h3>How colored pencils are made</h3>
+            <iframe class="video" src="https://www.youtube.com/embed/1N3YJMXqqu0" title="How colored pencils are made" allowfullscreen></iframe>
+        </section>
+
         <!-- Order form: data is sent to Supabase -->
         <section id="order">
             <h2>Place an order</h2>
@@ -78,6 +92,7 @@
 
                 <label for="quantity">Quantity</label>
                 <input id="quantity" type="number" min="1" max="20" value="1" required>
+                <p id="total">Total: $0</p>
 
                 <label for="message">Message (optional)</label>
                 <textarea id="message" rows="3"></textarea>
